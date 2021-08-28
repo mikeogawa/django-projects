@@ -1,0 +1,42 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+autopep8 = "*"
+coverage = "*"
+mypy = "*"
+pylint = "*"
+pylint-django = "*"
+pytest = "*"
+pytest-cov = "*"
+pytest-env = "*"
+pytest-mock = "*"
+pywatchman = "*"
+ptvsd = "*"
+
+[packages]
+boto3 = "*"
+django = "*"
+djangorestframework = "==3.12.2"
+django-basicauth = "*"
+django-cors-headers="*"
+django-filter = "*"
+drf-nested-routers = "*"
+injector = "*"
+more-itertools = "*"
+psycopg2-binary = "*"
+pyjwt = "*"
+pyyaml = "*"
+requests = "*"
+ulid-py = "*"
+uritemplate = "*"
+
+[requires]
+python_version = "3.8"
+
+[scripts]
+format = "autopep8 -r --in-place --global-config .pycodestyle ."
+check-format = "autopep8 --exit-code -r --diff --global-config .pycodestyle ."
+lint = "pylint --rcfile .pylintrc api apps apps_ex"
