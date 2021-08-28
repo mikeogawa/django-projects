@@ -11,7 +11,7 @@ python manage.py runserver
 ## SWAGGER
 
 ```
-http://localhost:8000/
+http://localhost:8000/swagger/
 ```
 
 ## SEED
