@@ -18,7 +18,7 @@ class SomeAuthentication(BaseAuthentication):
 ```py
 from rest_framework.permissions import BasePermission
 import setttings
-class IsBackend(BasePermission):
+class SomePermission(BasePermission):
     def has_permission(self, request, view):
         secret = self.get_password_from_head(request)
         return secret == settings.BACKEND_ENCRYPTION
