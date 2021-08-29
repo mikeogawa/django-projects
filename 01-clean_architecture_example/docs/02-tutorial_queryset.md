@@ -1,6 +1,6 @@
 ## QuerySet
 
-```
+```py
 python manage.py shell
 from company.models import Company
 c=Company(name="cat house",code="")

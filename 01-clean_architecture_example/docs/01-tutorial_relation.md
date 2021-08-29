@@ -10,7 +10,7 @@ OR
 
 ## Model
 
-```
+```py
 from django.db import models
 
 class BaseModel(models.Model):
@@ -32,7 +32,7 @@ class Company(BaseModel):
 
 ## Model Relation
 
-```
+```py
 from django.db import models
 from api.commons import BaseModel
 
@@ -42,8 +42,8 @@ class Shop(BaseModel):
     company = models.ForeignKey(
         'company.Company',
         db_column='company_id',
-        related_name='shops',
-        related_query_name='shop_id',
+        related_name='shops', # Comapny().shops
+        related_query_name='shop_id', # Company.objects.filter(shop_id...)
         null=True,
         on_delete=models.CASCADE,
     )
@@ -78,7 +78,7 @@ class ShopItemRel(BaseModel):
 
 ## How to Use
 
-```
+```py
 shop=Shop(code="a",name="a")
 item_a=Item(code="a",name="a")
 item_b=Item(code="b",name="b")
