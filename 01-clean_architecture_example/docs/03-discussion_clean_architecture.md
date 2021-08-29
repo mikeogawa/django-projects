@@ -88,9 +88,9 @@ Company ---< Shop >---< Item
 ```py
 class Repository:
     def filter_in_name_list(self,name_list:List[str]):
-        Company.objects.filter(name__in=name_list)
+        return Company.objects.filter(name__in=name_list)
     def filter_in_name_list_and_select_related_shop(self,name_list:List[str]):
-        Company.objects.select_related("shop").filter(name__in=name_list)
+        return Company.objects.select_related("shop").filter(name__in=name_list)
     ....
 
 # やりたいこと
