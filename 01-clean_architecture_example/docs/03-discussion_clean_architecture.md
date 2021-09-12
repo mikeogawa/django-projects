@@ -46,13 +46,14 @@ class GetCompany:
     def __init__(self, repository:BaseRepository):
         self.repository = repository
     def execute(self, id_:str):
-        return self.repository.get(id_)
+        return Repository().get(id_)
 
 class CompanyView(views.ViewSet):
     """
     Only Process Validation And Usecase
     """
     ....
+    # /api/companies/{company_id}/
     def retrieve(self, request, id):
 
         repository = Repository()
@@ -60,7 +61,7 @@ class CompanyView(views.ViewSet):
 
         data = usecase.execute(id)
 
-        serializer = CommentSerializer(comment)
+        serializer = CommentSerializer(data)
         return Response(serializer.data)
 ```
 
@@ -86,9 +87,20 @@ Company ---< Shop >---< Item
 - objects の query の組み合わせに応じて、メソッドを追加しないといけない
 
 ```py
+
+class TestRepository:
+
+    def filter_in_name_list(self,name_list:List[str]):
+        return Company.objects.filter(name__in=name_list)
+
+    def filter_in_name_list_and_select_related_shop(self,name_list:List[str]):
+        return Company.objects.select_related("shop").filter(name__in=name_list)
+
+
 class Repository:
     def filter_in_name_list(self,name_list:List[str]):
         return Company.objects.filter(name__in=name_list)
+
     def filter_in_name_list_and_select_related_shop(self,name_list:List[str]):
         return Company.objects.select_related("shop").filter(name__in=name_list)
     ....
@@ -121,3 +133,40 @@ Company.objects.select_related_shop().filter_in_name()
 
 デメリット
 - Clean？と疑う人もいる (objects が剥き出しになって気持ち悪い)
+
+
+
+依存性の逆転
+```py
+
+class FaceBook(Sender):
+    def notify(self):
+        self.facebook.send()
+
+class Email(Sender):
+    def notify(self):
+        self.email.send()
+
+class UseCase:
+
+    def __init__(self, sender: Sender):
+        self.sender = sender
+
+    def send(self):
+        self.sender.notify({
+            "message": "notice"
+        })
+
+
+class View:
+
+
+    def onclick(self):
+        email = Email()
+
+        usecase = UseCase(email)
+
+        usecase.send()
+
+
+```
