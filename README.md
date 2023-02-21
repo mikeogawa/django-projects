@@ -1,5 +1,7 @@
 # Projects Examples
 
+**NOTE: WIP**
+
 | Directory                     | Description                |
 |-------------------------------|----------------------------|
 | 01-clean_architecture_example | Clean Architecture Example |

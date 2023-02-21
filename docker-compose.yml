@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+
+  backend:
+    container_name: back-api
+    build:
+      context: ./01-clean_architecture_example
+      dockerfile: Dockerfile.local
+    volumes:
+      - ./01-clean_architecture_example:/backend
+    tty: true
+    ports:
+      - 8000:8000
+volumes:
+  django_data_volume_v2:
